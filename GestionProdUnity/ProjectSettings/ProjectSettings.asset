@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 7829daa616bcac142a1a126044a35804
+  productGUID: b333c1dd21073af4bb626ee82e10fd3e
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: GestionDeProd
+  productName: GestionProdUnity
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -78,7 +78,7 @@ PlayerSettings:
   androidMinimumWindowHeight: 300
   androidFullscreenMode: 1
   androidAutoRotationBehavior: 1
-  androidPredictiveBackSupport: 0
+  androidPredictiveBackSupport: 1
   androidApplicationEntry: 2
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
@@ -86,6 +86,7 @@ PlayerSettings:
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
   Force IOS Speakers When Recording: 0
+  audioSpatialExperience: 0
   deferSystemGesturesMode: 0
   hideHomeButton: 0
   submitAnalytics: 1
@@ -132,6 +133,7 @@ PlayerSettings:
   switchNVNMaxPublicSamplerIDCount: 0
   switchMaxWorkerMultiple: 8
   switchNVNGraphicsFirmwareMemory: 32
+  switchGraphicsJobsSyncAfterKick: 1
   vulkanNumSwapchainBuffers: 3
   vulkanEnableSetSRGBWrite: 0
   vulkanEnablePreTransform: 1
@@ -253,7 +255,7 @@ PlayerSettings:
   appleEnableProMotion: 0
   shaderPrecisionModel: 0
   clonedFromGUID: 3c72c65a16f0acb438eed22b8b16c24a
-  templatePackageId: com.unity.template.urp-blank@17.0.11
+  templatePackageId: com.unity.template.urp-blank@17.0.14
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
@@ -273,6 +275,9 @@ PlayerSettings:
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
+  androidAppCategory: 3
+  useAndroidAppCategory: 1
+  androidAppCategoryOther: 
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
@@ -542,6 +547,7 @@ PlayerSettings:
   - serializedVersion: 2
     m_BuildTarget: Android
     m_EncodingQuality: 1
+  m_BuildTargetGroupHDRCubemapEncodingQuality: []
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding:
@@ -810,12 +816,12 @@ PlayerSettings:
   webGLMemoryLinearGrowthStep: 16
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
-  webGLEnableWebGPU: 0
   webGLPowerPreference: 2
   webGLWebAssemblyTable: 0
   webGLWebAssemblyBigInt: 0
   webGLCloseOnQuit: 0
   webWasm2023: 0
+  webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols: {}
   additionalCompilerArguments: {}
   platformArchitecture: {}
@@ -837,14 +843,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: GestionDeProd
+  metroPackageName: GestionProdUnity
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: GestionDeProd
+  metroApplicationDescription: GestionProdUnity
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -913,12 +919,12 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: fbd49786-0275-431d-a597-5f5717dd38ce
+  cloudProjectId: 119eaf71-a99e-4e17-9c03-6c5de5806eef
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: GestionDeProd 2025-10-10_15-39-15
+  projectName: GestionProdUnity
   organizationId: neoyoann
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
@@ -928,3 +934,5 @@ PlayerSettings:
   insecureHttpOption: 0
   androidVulkanDenyFilterList: []
   androidVulkanAllowFilterList: []
+  androidVulkanDeviceFilterListAsset: {fileID: 0}
+  d3d12DeviceFilterListAsset: {fileID: 0}
