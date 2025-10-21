@@ -1,40 +1,33 @@
 using System;
+using ECM2;
+using ECM2.Examples;
+using ECM2.Examples.FirstPerson;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GravityCC : MonoBehaviour
+public class GravityCC : FirstPersonInput
 {
-    
-    private PlayerInput playerInput;
-    private CharacterController characterController;
-    private Vector2 inputDirection;
-    private float jumpInput;
-    private Vector3 playerMove;
 
-    private void Awake()
+    protected override void HandleInput()
     {
-        playerInput = GetComponent<PlayerInput>();
-        characterController = GetComponent<CharacterController>();
-    }
+        // Move
+            
+        Vector2 movementInput = GetMovementInput();
+            
+        Vector3 movementDirection = Vector3.zero;
+            
+        movementDirection += Vector3.forward * movementInput.y;
+        movementDirection += Vector3.right * movementInput.x;
+            
+        movementDirection = movementDirection.relativeTo(firstPersonCharacter.cameraTransform, firstPersonCharacter.GetUpVector());
+            
+        firstPersonCharacter.SetMovementDirection(movementDirection);
+            
+        // Look
+            
+        Vector2 lookInput = GetLookInput() * sensitivity;
 
-    private void FixedUpdate()
-    {
-        HandleMovement();
-    }
-
-    private void HandleMovement()
-    {
-        playerMove = new Vector3(inputDirection.x, jumpInput, inputDirection.y);
-        characterController.Move(playerMove);
-    }
-
-    public void MoveInputTrigger(InputAction.CallbackContext context)
-    {
-        inputDirection = context.ReadValue<Vector2>();
-    }
-
-    public void JumpInputTrigger(InputAction.CallbackContext context)
-    {
-        jumpInput = context.ReadValue<float>();
+        firstPersonCharacter.AddControlYawInput(lookInput.x);
+        firstPersonCharacter.AddControlPitchInput(invertLook ? -lookInput.y : lookInput.y, minPitch, maxPitch);
     }
 }
