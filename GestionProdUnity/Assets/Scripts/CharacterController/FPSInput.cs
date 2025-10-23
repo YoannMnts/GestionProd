@@ -1,3 +1,4 @@
+using System;
 using ECM2;
 using ECM2.Examples;
 using UnityEngine;
@@ -75,7 +76,7 @@ namespace CharacterController
             for (int i = 0; i < inputActionsAsset.actionMaps.Count; i++)
             {
                 var actionMap = inputActionsAsset.actionMaps[i];
-                if(actionMap.name != "Default")
+                if(actionMap.name != "NoGravity")
                     actionMap.Enable();
                 else
                     actionMap.Disable();
@@ -157,6 +158,15 @@ namespace CharacterController
 
             firstPersonCharacter.AddControlYawInput(lookInput.x);
             firstPersonCharacter.AddControlPitchInput(invertLook ? -lookInput.y : lookInput.y, minPitch, maxPitch);
+        }
+
+        private void FixedUpdate()
+        {
+            for (int i = 0; i < inputActionsAsset.actionMaps.Count; i++)
+            {
+                if (inputActionsAsset.actionMaps[i].enabled)
+                    Debug.Log(inputActionsAsset.actionMaps[i].name);
+            }
         }
     }
 }
