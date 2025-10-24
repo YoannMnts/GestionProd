@@ -101,7 +101,6 @@ namespace ECM2.Examples
         protected virtual void InitPlayerInput()
         {
             // Attempts to cache Character InputActions (if any)
-
             if (inputActionsAsset == null)
                 return;
             

@@ -1,6 +1,8 @@
 using System;
 using ECM2;
 using ECM2.Examples;
+using Extensions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
@@ -14,6 +16,9 @@ namespace CharacterController
     
     public class FPSInput : CharacterInput
     {
+        private const string DEFAULT_MAP = "Default";
+        private const string NO_GRAVITY_MAP = "NoGravity";
+
         [Space(15.0f)]
         public bool invertLook = true;
         [Tooltip("Look sensitivity")]
@@ -29,14 +34,18 @@ namespace CharacterController
         /// Cached FirstPersonCharacter.
         /// </summary>
 
-        public FPSCharacter firstPersonCharacter { get; private set; }
+        public FPSCharacter FirstPersonCharacter { get; private set; }
 
         /// <summary>
         /// Movement InputAction.
         /// </summary>
 
-        public InputAction lookInputAction { get; set; }
-
+        public InputAction LookInputAction { get; private set; }
+        public InputAction FloatingLookInputAction { get; private set; }
+        public InputAction FloatingMoveInputAction { get; private set; }
+        public FPSCharacter FPSCharacter => character as FPSCharacter;
+        
+        
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -47,7 +56,7 @@ namespace CharacterController
                 fpsCharacter.OnGravityDeactivates += OnGravityDeactivates;
             }
         }
-
+        
         protected override void OnDisable()
         {
             base.OnDisable();
@@ -61,26 +70,13 @@ namespace CharacterController
 
         public void OnGravityActivates()
         {
-            for (int i = 0; i < inputActionsAsset.actionMaps.Count; i++)
-            {
-                var actionMap = inputActionsAsset.actionMaps[i];
-                if(actionMap.name != "NoGravity")
-                    actionMap.Enable();
-                else
-                    actionMap.Disable();
-            }
+            inputActionsAsset.SetActionMaps(DEFAULT_MAP);
         }
         
         public void OnGravityDeactivates()
         {
-            for (int i = 0; i < inputActionsAsset.actionMaps.Count; i++)
-            {
-                var actionMap = inputActionsAsset.actionMaps[i];
-                if(actionMap.name != "NoGravity")
-                    actionMap.Enable();
-                else
-                    actionMap.Disable();
-            }
+            inputActionsAsset.SetActionMaps(NO_GRAVITY_MAP);
+            //Debug.Log("Deactivated");
         }
         /// <summary>
         /// Polls look InputAction (if any).
@@ -89,7 +85,8 @@ namespace CharacterController
         
         public Vector2 GetLookInput()
         {
-            return lookInputAction?.ReadValue<Vector2>() ?? Vector2.zero;
+            var action = FPSCharacter.IsFloating ? FloatingLookInputAction : LookInputAction;
+            return action?.ReadValue<Vector2>() ?? Vector2.zero;
         }
         
         /// <summary>
@@ -103,10 +100,17 @@ namespace CharacterController
             
             // Look input action (no handler, this is polled, e.g. GetLookInput())
 
-            lookInputAction = inputActionsAsset.FindAction("Look");
-            lookInputAction?.Enable();
+            LookInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Look");
+            FloatingLookInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Look");
+            FloatingMoveInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Move");
+            
+            LookInputAction?.Enable();
+            FloatingLookInputAction?.Enable();
+            FloatingMoveInputAction?.Enable();
+            
+            inputActionsAsset.SetActionMaps(DEFAULT_MAP);
         }
-        
+
         /// <summary>
         /// Unsubscribe from input action events and disable input actions.
         /// </summary>
@@ -114,21 +118,26 @@ namespace CharacterController
         protected override void DeinitPlayerInput()
         {
             base.DeinitPlayerInput();
-            
+
             // Unsubscribe from input action events and disable input actions
 
-            if (lookInputAction != null)
-            {
-                lookInputAction.Disable();
-                lookInputAction = null;
-            }
+            LookInputAction?.Disable();
+            LookInputAction = null;
+
+            FloatingLookInputAction?.Disable();
+            FloatingLookInputAction = null;
+            
+            FloatingMoveInputAction?.Disable();
+            FloatingMoveInputAction = null;
+            
+            inputActionsAsset.SetActionMaps();
         }
 
         protected override void Awake()
         {
             base.Awake();
             
-            firstPersonCharacter = character as FPSCharacter;
+            FirstPersonCharacter = character as FPSCharacter;
         }
 
         protected virtual void Start()
@@ -139,34 +148,41 @@ namespace CharacterController
         protected override void HandleInput()
         {
             // Move
-            
-            Vector2 movementInput = GetMovementInput();
-            
-            Vector3 movementDirection = Vector3.zero;
-            
-            movementDirection += Vector3.forward * movementInput.y;
-            movementDirection += Vector3.right * movementInput.x;
-            
-            movementDirection = 
-                movementDirection.relativeTo(firstPersonCharacter.cameraTransform, firstPersonCharacter.GetUpVector());
-            
-            firstPersonCharacter.SetMovementDirection(movementDirection);
-            
+
+            if (FPSCharacter.IsFloating)
+            {
+                Vector3 movementInput = FloatingMoveInputAction.ReadValue<Vector3>();
+                
+                Vector3 movementDirection = Vector3.zero;
+
+                movementDirection += Vector3.forward * movementInput.z;
+                movementDirection += Vector3.right * movementInput.x;
+                movementDirection += Vector3.up * movementInput.y;
+
+                FPSCharacter.SetFloatingDirection(movementDirection.normalized);
+            }
+            else
+            {
+                Vector2 movementInput = GetMovementInput();
+
+                Vector3 movementDirection = Vector3.zero;
+
+                movementDirection += Vector3.forward * movementInput.y;
+                movementDirection += Vector3.right * movementInput.x;
+
+                movementDirection =
+                    movementDirection.relativeTo(FirstPersonCharacter.cameraTransform,
+                        FirstPersonCharacter.GetUpVector());
+
+                FirstPersonCharacter.SetMovementDirection(movementDirection);
+            }
+
             // Look
-            
+
             Vector2 lookInput = GetLookInput() * sensitivity;
 
-            firstPersonCharacter.AddControlYawInput(lookInput.x);
-            firstPersonCharacter.AddControlPitchInput(invertLook ? -lookInput.y : lookInput.y, minPitch, maxPitch);
-        }
-
-        private void FixedUpdate()
-        {
-            for (int i = 0; i < inputActionsAsset.actionMaps.Count; i++)
-            {
-                if (inputActionsAsset.actionMaps[i].enabled)
-                    Debug.Log(inputActionsAsset.actionMaps[i].name);
-            }
+            FirstPersonCharacter.AddControlYawInput(lookInput.x);
+            FirstPersonCharacter.AddControlPitchInput(invertLook ? -lookInput.y : lookInput.y, minPitch, maxPitch);
         }
     }
 }

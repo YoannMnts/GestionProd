@@ -2626,7 +2626,8 @@ namespace ECM2
         
         public virtual float GetMaxJumpHeight()
         {
-            float gravityMagnitude = GetGravityMagnitude();
+            float gravityMagnitude = 
+                GetGravityMagnitude();
             if (gravityMagnitude > 0.0001f)
             {
                 return jumpImpulse * jumpImpulse / (2.0f * gravityMagnitude);

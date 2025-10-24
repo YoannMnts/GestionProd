@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CharacterController
 {
-    public class FPSCharacter : Character
+    public partial class FPSCharacter : Character
     {
         public event Action OnGravityActivates;
         public event Action OnGravityDeactivates;
@@ -18,13 +18,18 @@ namespace CharacterController
         public bool IsGravityActive { get; private set; }
 
 
+        protected override void Awake()
+        {
+            base.Awake();
+            IsGravityActive = true;
+        }
+
         public void ActivateGravity()
         {
             if(IsGravityActive)
                 return;
 
             IsGravityActive = true;
-            gravityScale = 1;
             OnGravityActivates?.Invoke();
         }
 
@@ -34,7 +39,7 @@ namespace CharacterController
                 return;
             
             IsGravityActive = false;
-            gravityScale = 0;
+            Debug.Log("Deactivating gravity");
             OnGravityDeactivates?.Invoke();
         }
         
@@ -77,6 +82,10 @@ namespace CharacterController
         {
             UpdateCameraParentRotation();
         }
+
+        public override bool CanJump() => base.CanJump() && IsGravityActive;
+
+        protected override bool IsCrouchAllowed() => base.IsCrouchAllowed() && IsGravityActive;
 
         /// <summary>
         /// If overriden, base method MUST be called.
