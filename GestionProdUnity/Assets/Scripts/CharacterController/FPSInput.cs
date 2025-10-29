@@ -158,6 +158,10 @@ namespace CharacterController
                 movementDirection += Vector3.forward * movementInput.z;
                 movementDirection += Vector3.right * movementInput.x;
                 movementDirection += Vector3.up * movementInput.y;
+                
+                movementDirection =
+                    movementDirection.relativeTo(FirstPersonCharacter.cameraTransform, 
+                        FirstPersonCharacter.GetUpVector());
 
                 FPSCharacter.SetFloatingDirection(movementDirection.normalized);
             }

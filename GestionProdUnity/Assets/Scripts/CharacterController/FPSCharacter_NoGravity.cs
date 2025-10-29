@@ -58,7 +58,8 @@ namespace CharacterController
         private void DoFloating()
         {
             SetMovementMode(MovementMode.Custom, (int)CharacterCustomMovementMode.NoGravity);
-            AddForce(-GetGravityDirection().normalized * 5);
+            EnableGroundConstraint(false);
+            //AddForce(-GetGravityDirection().normalized * 5);
         }
         
         private void StopFloating()
@@ -69,8 +70,7 @@ namespace CharacterController
         private void DoFloatingMovementMode(float deltaTime)
         {
             SetMovementDirection(Vector3.zero);
-            AddForce(FloatingDirection);
-            Debug.Log(FloatingDirection);
+            AddForce(FloatingDirection * floatingForce);
         }
     }
 }
