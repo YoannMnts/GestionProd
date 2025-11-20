@@ -1,11 +1,14 @@
+using CharacterController;
 using UnityEngine;
-using Scripts; // pour IInteractable
+using Scripts; 
 
 public class CablesPanel : MonoBehaviour, Iinteractable
 {
-    public string InteractMessage => "Appuyez sur E pour brancher les câbles";
-    
-    [SerializeField] private GameObject cableUI; 
+    public string InteractMessage => isActive ? "" : "Appuyez sur E pour brancher les câbles";
+    [SerializeField]
+    private GameObject cableUI;
+    [SerializeField]
+    private FPSInput fpsInput;
 
     private bool isActive = false;
 
@@ -16,10 +19,12 @@ public class CablesPanel : MonoBehaviour, Iinteractable
         if (isActive)
         {
             Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
+            Cursor.visible = true;
+            fpsInput.enabled = false;
         }
         else
         {
+            fpsInput.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
