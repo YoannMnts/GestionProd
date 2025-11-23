@@ -43,6 +43,8 @@ namespace CharacterController
         public InputAction LookInputAction { get; private set; }
         public InputAction FloatingLookInputAction { get; private set; }
         public InputAction FloatingMoveInputAction { get; private set; }
+        
+        public InputAction InteractInputAction { get; private set; }
         public FPSCharacter FPSCharacter => character as FPSCharacter;
         
         
@@ -103,7 +105,7 @@ namespace CharacterController
             LookInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Look");
             FloatingLookInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Look");
             FloatingMoveInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Move");
-            
+            InteractInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Interact");
             LookInputAction?.Enable();
             FloatingLookInputAction?.Enable();
             FloatingMoveInputAction?.Enable();

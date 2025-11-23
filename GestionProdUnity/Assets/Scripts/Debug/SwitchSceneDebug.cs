@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using CharacterController;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,12 +8,15 @@ public class SwitchSceneDebug : MonoBehaviour
 {
     [SerializeField]
     private InputActionAsset inputActionsAsset;
+    
     private InputAction debugAction1;
     private InputAction debugAction2;
     private InputAction debugAction3;
+    
 
     private void Start()
     {
+        
         debugAction1 = inputActionsAsset.FindActionMap("Default").FindAction("Debug");
         debugAction2 = inputActionsAsset.FindActionMap("Default").FindAction("Debug1");
         debugAction3 = inputActionsAsset.FindActionMap("Default").FindAction("Debug2");

@@ -18,7 +18,6 @@ public class UI : MonoBehaviour
     private void FixedUpdate()
     {
         var isDebugMenu = (int)menuAction.ReadValue<float>() == 1;
-        Debug.Log(isDebugMenu);
         debugCanvasGroup.alpha = isDebugMenu ? 1 : 0;
     }
 }
