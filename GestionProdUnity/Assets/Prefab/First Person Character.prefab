@@ -216,6 +216,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwitchSceneDebug
   inputActionsAsset: {fileID: -944628639613478452, guid: de4fb5b22cf468c48b7d544e38974250, type: 3}
+  <gravityScenePosition>k__BackingField: {x: -81.25, y: -2.4, z: 141.75}
+  <oxygenScenePosition>k__BackingField: {x: -1.5, y: 1, z: -4.2}
+  <labScenePosition>k__BackingField: {x: -0.4, y: -1.33, z: -4}
+  <gravitySceneRotation>k__BackingField: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
+  <oxygenSceneRotation>k__BackingField: {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
+  <labSceneRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7068751150559642462
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580e75594258496982d99fc1db6f5ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController.FPSInteraction
+  fpsInput: {fileID: 0}
 --- !u!1 &8714510931147763382
 GameObject:
   m_ObjectHideFlags: 0

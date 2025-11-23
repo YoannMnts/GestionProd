@@ -103,9 +103,9 @@ namespace CharacterController
             // Look input action (no handler, this is polled, e.g. GetLookInput())
 
             LookInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Look");
+            InteractInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Interact");
             FloatingLookInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Look");
             FloatingMoveInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Move");
-            InteractInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Interact");
             LookInputAction?.Enable();
             FloatingLookInputAction?.Enable();
             FloatingMoveInputAction?.Enable();
@@ -153,6 +153,7 @@ namespace CharacterController
 
             if (FPSCharacter.IsFloating)
             {
+                InteractInputAction?.Enable();
                 Vector3 movementInput = FloatingMoveInputAction.ReadValue<Vector3>();
                 
                 Vector3 movementDirection = Vector3.zero;

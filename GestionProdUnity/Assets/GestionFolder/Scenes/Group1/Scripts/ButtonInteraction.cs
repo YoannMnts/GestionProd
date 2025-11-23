@@ -9,14 +9,30 @@ public class ButtonInteraction : MonoBehaviour, IInteractable
     private FPSCharacter character;
     [SerializeField]
     private NoGravityZone[] noGravityZones;
+    [SerializeField]
+    private GameObject[] spawnGO;
+    [SerializeField]
+    private GameObject[] gravityGO;
 
     public void Interact()
     {
+        Debug.Log("aaaa");
         character.ActivateGravity();
         foreach (var noGravityZone in noGravityZones)
         {
             noGravityZone.gameObject.SetActive(false);
         }
+
+        foreach (var gameObject in spawnGO)
+        {
+            gameObject.SetActive(true);
+        }
+        /*
+        foreach (var gameObject in gravityGO)
+        {
+            gameObject.GetComponent<Animator>().enabled = true;
+        }
+        */
         isDone = true;
     }
 }
