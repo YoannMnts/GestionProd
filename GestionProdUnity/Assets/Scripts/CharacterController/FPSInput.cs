@@ -43,6 +43,8 @@ namespace CharacterController
         public InputAction LookInputAction { get; private set; }
         public InputAction FloatingLookInputAction { get; private set; }
         public InputAction FloatingMoveInputAction { get; private set; }
+        
+        public InputAction InteractInputAction { get; private set; }
         public FPSCharacter FPSCharacter => character as FPSCharacter;
         
         
@@ -101,9 +103,9 @@ namespace CharacterController
             // Look input action (no handler, this is polled, e.g. GetLookInput())
 
             LookInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Look");
+            InteractInputAction = inputActionsAsset.FindActionMap(DEFAULT_MAP).FindAction("Interact");
             FloatingLookInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Look");
             FloatingMoveInputAction = inputActionsAsset.FindActionMap(NO_GRAVITY_MAP).FindAction("Move");
-            
             LookInputAction?.Enable();
             FloatingLookInputAction?.Enable();
             FloatingMoveInputAction?.Enable();
@@ -151,6 +153,7 @@ namespace CharacterController
 
             if (FPSCharacter.IsFloating)
             {
+                InteractInputAction?.Enable();
                 Vector3 movementInput = FloatingMoveInputAction.ReadValue<Vector3>();
                 
                 Vector3 movementDirection = Vector3.zero;

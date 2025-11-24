@@ -10,6 +10,8 @@ namespace CharacterController
         public event Action OnGravityActivates;
         public event Action OnGravityDeactivates;
         
+        public static FPSCharacter Instance { get; private set; }
+        
         [Tooltip("The first person camera parent.")]
         public GameObject cameraParent;
 
@@ -21,6 +23,13 @@ namespace CharacterController
         protected override void Awake()
         {
             base.Awake();
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
             IsGravityActive = true;
         }
 

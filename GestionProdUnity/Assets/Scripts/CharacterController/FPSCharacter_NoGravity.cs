@@ -41,7 +41,7 @@ namespace CharacterController
             if (IsGravityActive && IsFloating)
                 StopFloating();
             
-            Debug.Log($"{IsGravityActive} => {IsFloating}");
+            //Debug.Log($"{IsGravityActive} => {IsFloating}");
             gravityScale = IsFloating ? 0f : 1f;
         }
 
@@ -65,6 +65,7 @@ namespace CharacterController
         private void StopFloating()
         {
             SetMovementMode(MovementMode.Falling);
+            EnableGroundConstraint(true);
         }
         
         private void DoFloatingMovementMode(float deltaTime)
