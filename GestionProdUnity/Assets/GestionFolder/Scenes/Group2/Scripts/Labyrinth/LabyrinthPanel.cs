@@ -9,6 +9,7 @@ public class LabyrinthPanel : MonoBehaviour, Iinteractable
     [SerializeField] GameObject labyrinthUI;
     private bool active = false;
     
+    [SerializeField] 
     private FPSInput fpsInput;
 
     public void Interact()
