@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GestionFolder/Scenes/Gym room/GymRoom.unity
-    guid: 6c4a9e8d2ed59f64e88efea4667ded92
-  - enabled: 1
-    path: Assets/GestionFolder/Scenes/Gym room/BeautifullCorner.unity
-    guid: add302d392f83024ebbd0675d53e857d
+    path: Assets/GestionFolder/Scenes/FinalBuild.unity
+    guid: ad52fcc3ee4b0704abac3eaa49afc51e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

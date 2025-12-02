@@ -13,6 +13,8 @@ public class ButtonInteraction : MonoBehaviour, IInteractable
     private GameObject[] spawnGO;
     [SerializeField]
     private GameObject[] gravityGO;
+    [SerializeField]
+    private GameObject doorGO;
 
     public void Interact()
     {
@@ -27,6 +29,7 @@ public class ButtonInteraction : MonoBehaviour, IInteractable
         {
             gameObject.SetActive(true);
         }
+        doorGO.SetActive(false);
         /*
         foreach (var gameObject in gravityGO)
         {
