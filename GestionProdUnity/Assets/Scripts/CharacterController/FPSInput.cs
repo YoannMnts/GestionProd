@@ -165,7 +165,7 @@ namespace CharacterController
                 movementDirection =
                     movementDirection.relativeTo(FirstPersonCharacter.cameraTransform, 
                         FirstPersonCharacter.GetUpVector());
-
+                
                 FPSCharacter.SetFloatingDirection(movementDirection.normalized);
             }
             else
