@@ -71,11 +71,11 @@ namespace CharacterController
         private void DoFloatingMovementMode(float deltaTime)
         {
             SetMovementDirection(Vector3.zero);
-            var finalForce = new Vector3(
-                Mathf.Clamp(FloatingDirection.x * floatingForce, -maxWalkSpeed, maxWalkSpeed),
-                Mathf.Clamp(FloatingDirection.y * floatingForce, -maxWalkSpeed, maxWalkSpeed),
-                Mathf.Clamp(FloatingDirection.z * floatingForce, -maxWalkSpeed, maxWalkSpeed));
-            AddForce(finalForce);
+            AddForce(FloatingDirection * floatingForce);
+            characterMovement.velocity = new Vector3(
+                Mathf.Clamp(velocity.x, -maxWalkSpeed*2, maxWalkSpeed*2),
+                Mathf.Clamp(velocity.y, -maxWalkSpeed*2, maxWalkSpeed*2),
+                Mathf.Clamp(velocity.z, -maxWalkSpeed*2, maxWalkSpeed*2));
         }
     }
 }
