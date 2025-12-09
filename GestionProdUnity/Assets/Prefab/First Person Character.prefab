@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4720803909581590613}
   - component: {fileID: 8769159523433608628}
   - component: {fileID: 8127305014636890017}
+  - component: {fileID: 6053560952542034}
+  - component: {fileID: 22751960199779922}
   m_Layer: 0
   m_Name: First Person Character
   m_TagString: Player
@@ -215,13 +217,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad69f1a32a2caa8428cce56ffd60a605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwitchSceneDebug
-  inputActionsAsset: {fileID: -944628639613478452, guid: de4fb5b22cf468c48b7d544e38974250, type: 3}
-  <gravityScenePosition>k__BackingField: {x: -81.25, y: -2.4, z: 141.75}
-  <oxygenScenePosition>k__BackingField: {x: -1.5, y: 1, z: -4.2}
-  <labScenePosition>k__BackingField: {x: -0.4, y: -1.33, z: -4}
-  <gravitySceneRotation>k__BackingField: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
-  <oxygenSceneRotation>k__BackingField: {x: 0, y: 0.70710677, z: 0, w: -0.70710677}
-  <labSceneRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+  camera: {fileID: 243483823791580934}
+  text: {fileID: 0}
+  distance: 5
+--- !u!114 &6053560952542034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898861864681686655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad69f1a32a2caa8428cce56ffd60a605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Interactor
+  camera: {fileID: 243483823791580934}
+  text: {fileID: 0}
+  distance: 5
+--- !u!114 &22751960199779922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898861864681686655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccff0dc1d5ee2d848a466ad891b452df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryHassoul
 --- !u!1 &7068751150559642462
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580e75594258496982d99fc1db6f5ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController.FPSInteraction
-  fpsInput: {fileID: 0}
+  fpsInput: {fileID: 8769159523433608628}
 --- !u!1 &8714510931147763382
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +414,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 5000
   field of view: 60
   orthographic: 0
   orthographic size: 5
