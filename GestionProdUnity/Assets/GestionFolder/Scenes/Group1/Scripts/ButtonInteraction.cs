@@ -1,6 +1,8 @@
+using System;
 using CharacterController;
 using GestionFolder.Scenes.Group1.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ButtonInteraction : MonoBehaviour, IInteractable
 {
@@ -10,9 +12,9 @@ public class ButtonInteraction : MonoBehaviour, IInteractable
     [SerializeField]
     private NoGravityZone[] noGravityZones;
     [SerializeField]
-    private GameObject[] spawnGO;
+    private GameObject rootSpawnGO;
     [SerializeField]
-    private GameObject[] gravityGO;
+    private GameObject rootGravityGO;
     [SerializeField]
     private GameObject doorGO;
 
@@ -25,17 +27,22 @@ public class ButtonInteraction : MonoBehaviour, IInteractable
             noGravityZone.gameObject.SetActive(false);
         }
 
-        foreach (var gameObject in spawnGO)
+        var spawnedChilds = rootSpawnGO.GetComponentsInChildren<MeshRenderer>();
+        foreach (var child in spawnedChilds)
         {
-            gameObject.SetActive(true);
+            Debug.Log(child);
+            child.enabled = true;
+            child.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
         doorGO.SetActive(false);
-        /*
-        foreach (var gameObject in gravityGO)
+        
+        var gravityChilds = rootGravityGO.GetComponentsInChildren<MeshRenderer>();
+        foreach (var child in gravityChilds)
         {
-            gameObject.GetComponent<Animator>().enabled = true;
+            child.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            //child.gameObject.GetComponent<Animator>().enabled = true;
         }
-        */
+        
         isDone = true;
     }
 }
