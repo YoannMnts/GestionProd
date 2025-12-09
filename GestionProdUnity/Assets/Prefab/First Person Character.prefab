@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4720803909581590613}
   - component: {fileID: 8769159523433608628}
   - component: {fileID: 8127305014636890017}
+  - component: {fileID: 6053560952542034}
+  - component: {fileID: 22751960199779922}
   m_Layer: 0
   m_Name: First Person Character
   m_TagString: Player
@@ -218,6 +220,33 @@ MonoBehaviour:
   camera: {fileID: 243483823791580934}
   text: {fileID: 0}
   distance: 5
+--- !u!114 &6053560952542034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898861864681686655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad69f1a32a2caa8428cce56ffd60a605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Interactor
+  camera: {fileID: 243483823791580934}
+  text: {fileID: 0}
+  distance: 5
+--- !u!114 &22751960199779922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898861864681686655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccff0dc1d5ee2d848a466ad891b452df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryHassoul
 --- !u!1 &7068751150559642462
 GameObject:
   m_ObjectHideFlags: 0
