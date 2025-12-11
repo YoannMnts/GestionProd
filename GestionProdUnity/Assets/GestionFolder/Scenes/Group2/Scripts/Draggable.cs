@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
 
@@ -54,4 +54,4 @@ public class Draggable : MonoBehaviour
         currentT = t;
         transform.position = nearest;
     }
-}
+}*/
