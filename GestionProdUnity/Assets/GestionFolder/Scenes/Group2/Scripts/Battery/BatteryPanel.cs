@@ -3,23 +3,22 @@ using UnityEngine;
 using Scripts;
 using UnityEngine.EventSystems;
 
-public class LabyrinthPanel : MonoBehaviour, Iinteractable
+
+public class BatteryPanel : MonoBehaviour, Iinteractable
 {
-    public string InteractMessage => active ? "" : "Appuyez sur E pour résoudre le labyrinthe";
-    
-    
-    [SerializeField] GameObject labyrinthUI;
-    private bool active = false;
-    
-    [SerializeField] 
+    public string InteractMessage => isActive ? "" : "Appuyez sur E pour Remplir la batterie";
+    [SerializeField]
+    private GameObject cableUI;
+    [SerializeField]
     private FPSInput fpsInput;
+
+    private bool isActive = false;
 
     public void Interact()
     {
-        active = !active;
-        labyrinthUI.SetActive(active);
-
-        if (active)
+        isActive = !isActive;
+        cableUI.SetActive(isActive);
+        if (isActive)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -27,12 +26,9 @@ public class LabyrinthPanel : MonoBehaviour, Iinteractable
         }
         else
         {
+            fpsInput.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            fpsInput.enabled = true;
         }
     }
-    
-    
 }
-
